@@ -14,7 +14,7 @@ const flexiConfig = {
       label: "Person's state",
       type: "DropDown",
       values: ["Maharashtra", "Kerala", "Tamil Nadu"]
-    },
+    }
   ]
 };
 
@@ -25,23 +25,16 @@ class App extends Component {
       Person: []
     };
   }
-  onFlexSubmit = (e,object) => {
+  onFlexSubmit = (e, object) => {
     e.preventDefault();
-  console.log(object)
+    console.log(object)
+
   };
   render() {
-    console.log(this.state)
+    console.log(this.state);
     return (
       <div className="App">
         <Flexi onSubmit={this.onFlexSubmit} config={flexiConfig} />
-        {this.state.Person.map((item, index) => {
-          return (
-            <div key={index}>
-              <h2>{item.person_name}</h2>
-              <p>{item.states}</p>
-            </div>
-          );
-        })}
       </div>
     );
   }

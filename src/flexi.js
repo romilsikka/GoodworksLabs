@@ -3,14 +3,14 @@ import "./App.css";
 
 const Flexi = (props)=>{
 let object;
+
   const userInput = (e) => {
       const index = props.config.items.findIndex((item)=>{
         return item.type === e.target.name
       })
       let obj = props.config.items;
           obj[index].name = e.target.value;
-          object = obj;
-
+          object = JSON.stringify(obj);
   }
     return (
       <form onSubmit={e => {props.onSubmit(e, object)}}>

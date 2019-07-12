@@ -1,42 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 
-class Flexi extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userInputValues: {},
-      jsonObject: {}
-    };
+const Flexi = (props)=>{
+let object;
+  const userInput = (e) => {
+      const index = props.config.items.findIndex((item)=>{
+        return item.type === e.target.name
+      })
+      let obj = props.config.items;
+          obj[index].name = e.target.value;
+          object = obj;
+
   }
-  userInput = e => {
-    this.setState(
-      {
-        userInputValues: { ...this.state.userInputValues, [e.target.name]: e.target.value }
-      },
-      () => {
-        this.setState({
-          jsonObject: JSON.stringify(this.state.userInputValues)
-        });
-      }
-    );
-  };
-  render() {
-    const {jsonObject} = this.state;
     return (
-      <form onSubmit={e => {this.props.onSubmit(e, jsonObject)}}>
-        {this.props.config && this.props.config.items.map((item, index) => {
+      <form onSubmit={e => {props.onSubmit(e, object)}}>
+        {props.config && props.config.items.map((item, index) => {
             return (
               <div key={index} className="App">
                 <label>{item.label}</label>
                 {item.type === "TextField" ? (
                   <input
-                    onChange={this.userInput}
+                    onChange={(e)=>{userInput(e)}}
                     type="text"
-                    name={item.name}
+                    name={item.type}
                   />
                 ) : item.type === "DropDown" ? (
-                  <select onChange={this.userInput} name={item.name}>
+                  <select onChange={(e)=>{userInput(e)}} name={item.type}>
                     {item.values && item.values.map((value, i) => {
                         return (
                           <option key={i} value={value}>
@@ -52,7 +41,6 @@ class Flexi extends Component {
         <input type="submit" value="AddUser" />
       </form>
     );
-  }
 }
 
 export default Flexi;

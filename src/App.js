@@ -32,6 +32,7 @@ class App extends Component {
       })
   };
   render() {
+    console.log(this.state.Person)
     return (
       <div className="App">
         <Flexi onSubmit={this.onFlexSubmit} config={flexiConfig} />

@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 
 const Flexi = (props)=>{
-let object;
+let PersonObject;
 
   const userInput = (e) => {
       const index = props.config.items.findIndex((item)=>{
@@ -10,21 +10,21 @@ let object;
       })
       let obj = props.config.items;
           obj[index].name = e.target.value;
-          object = JSON.stringify(obj);
+          PersonObject = JSON.stringify(obj);
   }
     return (
-      <form onSubmit={e => {props.onSubmit(e, object)}}>
+      <form onSubmit={e => {props.onSubmit(e, PersonObject)}}>
         {props.config && props.config.items.map((item, index) => {
             return (
               <div key={index} className="App">
-                <label>{item.label}</label>
-                {item.type === "TextField" ? (
+                <label>   {item.label}   </label>
+                {item.type === "TextField" ?
                   <input
                     onChange={(e)=>{userInput(e)}}
                     type="text"
                     name={item.type}
                   />
-                ) : item.type === "DropDown" ? (
+                : item.type === "DropDown" ?
                   <select onChange={(e)=>{userInput(e)}} name={item.type}>
                     {item.values && item.values.map((value, i) => {
                         return (
@@ -34,7 +34,7 @@ let object;
                         );
                       })}
                   </select>
-                ) : null}
+                   : null}
               </div>
             );
           })}
